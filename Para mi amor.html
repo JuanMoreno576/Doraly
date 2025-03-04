@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti amor</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .hidden { display: none; }
+        .love-message { font-size: 20px; }
+        .heart { color: red; font-size: 30px; }
+    </style>
+</head>
+<body>
+    <h1 id="main-title">Hola mi amor, lo hice para ti con mucho amor, espero te guste ❤️</h1>
+    <div id="initial-buttons">
+        <button onclick="showLoveMessage()">Te amo mi amor</button>
+        <button onclick="showExitMessage()">No quiero nada</button>
+    </div>
+    
+    <div id="love-message" class="hidden">
+        <h1>Te amo mucho bebe</h1>
+        <p class="love-message">
+            Hola amor. <br>Si soy yo el más guapo de todos, como no, estoy aquí para recordarte amor que hoy es 14/8...<br>
+            <span class="heart">❤️</span>
+        </p>
+        <button onclick="showNextPart()">Siguiente</button>
+    </div>
+    
+    <div id="exit-message" class="hidden">
+        <h1>Está bien, amor. 😔</h1>
+        <p>Si algún día cambias de opinión, aquí estaré para ti...</p>
+    </div>
+    
+    <div id="next-part" class="hidden">
+        <h2>¿Ahora elige?</h2>
+        <button onclick="startLoveLoop()">Éligela si me amas</button>
+        <button onclick="showNoLoveMessage()">Éligeme si no me amas</button>
+    </div>
+    
+    <div id="love-loop" class="hidden">
+        <h2 id="love-question">¿Me amas?</h2>
+        <button id="yes-button" onclick="endLoveLoop()">Sí</button>
+        <button id="no-button" onclick="moveNoButton()">No</button>
+    </div>
+    
+    <div id="final-love-message" class="hidden">
+        <h2 id="love-level">Me amas mucho</h2>
+    </div>
+    
+    <div id="no-love-message" class="hidden">
+        <h2>Me rompiste el corazón 💔</h2>
+    </div>
+    
+    <script>
+        function showLoveMessage() {
+            document.getElementById('initial-buttons').style.display = 'none';
+            document.getElementById('main-title').style.display = 'none';
+            document.getElementById('love-message').classList.remove('hidden');
+        }
+
+        function showExitMessage() {
+            document.getElementById('initial-buttons').style.display = 'none';
+            document.getElementById('exit-message').classList.remove('hidden');
+        }
+
+        function showNextPart() {
+            document.getElementById('love-message').classList.add('hidden');
+            document.getElementById('next-part').classList.remove('hidden');
+        }
+
+        function startLoveLoop() {
+            document.getElementById('next-part').classList.add('hidden');
+            document.getElementById('love-loop').classList.remove('hidden');
+        }
+
+        function showNoLoveMessage() {
+            document.getElementById('next-part').classList.add('hidden');
+            document.getElementById('no-love-message').classList.remove('hidden');
+        }
+
+        function endLoveLoop() {
+            let loveStages = ["Me amas mucho", "Mucho mucho", "Súper segura", "Yo también mi amor bella ❤️ \n Ahora dame un beso"];
+            let currentStage = document.getElementById('love-level').innerText;
+            let nextStageIndex = loveStages.indexOf(currentStage) + 1;
+            
+            if (nextStageIndex < loveStages.length) {
+                document.getElementById('love-level').innerText = loveStages[nextStageIndex];
+            } else {
+                document.getElementById('love-loop').classList.add('hidden');
+                document.getElementById('final-love-message').classList.remove('hidden');
+            }
+        }
+
+        function moveNoButton() {
+            let button = document.getElementById('no-button');
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            button.style.position = 'absolute';
+            button.style.left = ${x}px;
+            button.style.top = ${y}px;
+        }
+    </script>
+</body>
+</html>
